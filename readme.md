@@ -52,3 +52,7 @@ the full src url should look something like this:
 
 http://example.com/framedpage.html?leech=http%3A%2F%2Fmydomain.com%2Fscreaming-leech%2Fleech.html%3Fid%3Dtestleech%26resize%3Dtrue
 
+TODOs
+-----
+
+* Enable cookies to preserve leech instructions through simulated session.
