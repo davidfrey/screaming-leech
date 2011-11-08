@@ -32,9 +32,45 @@ domain, screaming leech will dynamically create a nested iframe loading a helper
 file on the host domain with querystring parameters containing instructions for
 resize and scroll events.
 
-	My Page
-	 + Iframed Page
-	 + + Dynamically created iframe to leech helper on the same domain as My Page.
+	*---------------------------------------------------------*
+	| HOST PAGE  mydomain.com                                 |
+	| <script src="mydomain.com/screaming-leech.js">          |
+	|                                                         |
+	| Page content, when an iframe is created, a querystring  |
+	| is appended to pass instructions to the remote page.    |
+	| *-----------------------------------------------------* |
+	| | REMOTE PAGE  otherdomain.com/page.html?query        | |
+	| |                                                     | |
+	| | Page content of unknown length.                     | |
+	| | <script src="mydomain.com/screaming-leech.js">      | |
+	| |                                                     | |
+	| | Screaming Leech parses the querystring for          | |
+	| | instructions and dynamically creates a nested       | |
+	| | iframe to a helper page hosted on mydomain.com.     | |
+	| | The dynamic iframe contains querystring             | |
+	| | instructions interpreting the height of the content | |
+	| | and any passthrough instructions like scroll.       | |
+	| | *-------------------------------------------------* | |
+	| | | DYNAMIC IFRAME mydomain.com/leechhelper?query   | | |
+	| | | <script src="mydomain.com/screaming-leech.js">  | | |
+	| | |                                                 | | |
+	| | | Since the helper page and the host page are on  | | |
+	| | | the same domain, the helper can make javascript | | |
+	| | | calls to the host page without triggering       | | |
+	| | | browser XSS security measures.                  | | |
+	| | |                                                 | | |
+	| | | window.parent.parent.resize();                  | | |
+	| | | window.parent.parent.scrollTo();                | | |
+	| | |                                                 | | |
+	| | | window = dynamic iframe                         | | |
+	| | | window.parent = remote page iframe              | | |
+	| | | window.parent.parent = host page                | | |
+	| | *-------------------------------------------------* | |
+	| *-----------------------------------------------------* |
+	|                                                         |
+	| Additional host page content can follow the remote      |
+	| iframe without any additional scrollbars.               |
+	*---------------------------------------------------------*
   
 The dynamically created iframe requires a path to the leech helper along with 
 querystring instructions url encoded into the source of the iframe. So for 
