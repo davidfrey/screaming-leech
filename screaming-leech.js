@@ -1,10 +1,14 @@
 /**
- * Screaming Leech
- * A javascript pattern to grant cross-domain iframes back door access to 
- * leech's internal methods.
+ * Screaming Leech v0.1
+ * https://github.com/davidfrey/screaming-leech
  *
- * Author: David Frey <watchtower@facesofdave.com>
- * Created: November 5, 2011
+ * A nested iframe pattern to grant cross-site scripting access to methods 
+ * typically blocked by the browser.
+ *
+ * Copyright (c) 2011, David Frey
+ *
+ * License: MIT 
+ * https://github.com/davidfrey/screaming-leech/blob/master/mit-license.txt
  */
 
 function ScreamingLeech() {
