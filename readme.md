@@ -7,22 +7,22 @@
 SCREAMING LEECH
 ===============
 
-If you regularly use iframes to load content from another site such as a web 
-forms, you've probably run into XSS (cross-site security) issues when trying
-to maintain the iframe height relative to the content. There are lots of
-work arounds, but nothing terribly easy.
+If you regularly use iframes to load content from another site with the 
+intention that the content looks like its part of your site, you've probably 
+run into XSS (cross-site scripting) security measures when attempting to resize
+a frame relative to its content. There are lots of work arounds, but nothing 
+I've seen that doesn't require a bit of tearing your hair out.
 
 Enter the screaming leech.
 --------------------------
 
 Screaming Leech aims to provide a simple drop-in javascript library to make it
-easy to manage iframe height and scroll position when loading web forms via
-an iframe. Screaming Leech works by dynamically creating an iframe inside the
-iframed page that loads javascript local to the host page. Since browsers allow
-host pages to communicate with iframed pages we can circumvente XSS blocking.
+easy to manage iframe height and scroll position when loading remote pages via
+an iframe. Screaming Leech works by dynamically creating a nested iframe inside
+the remote page to permit access to host page javascript. 
 
-NOTE: This requires that you have the ability to add a `<script>` tag to the
-the bottom of your framed page.
+NOTE: This solution requires that you have the ability to alter the HTML of the 
+remote page.
 
 How it works:
 -------------
@@ -88,8 +88,13 @@ the full src url should look something like this:
 
 http://example.com/framedpage.html?leech=http%3A%2F%2Fmydomain.com%2Fscreaming-leech%2Fleech.html%3Fid%3Dtestleech%26resize%3Dtrue
 
+Known Issues
+------------
+
+* Iframed page reloads do not retain querystring instructions.
+
 TODOs
 -----
 
 * Simplify integration by dynamically generating remote page iframe from hyperlink
-* Enable cookies to preserve leech instructions through simulated session.
+* Enable local cookies to preserve instructions through a simulated session.
