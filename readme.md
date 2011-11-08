@@ -91,4 +91,5 @@ http://example.com/framedpage.html?leech=http%3A%2F%2Fmydomain.com%2Fscreaming-l
 TODOs
 -----
 
+* Simplify integration by dynamically generating remote page iframe from hyperlink
 * Enable cookies to preserve leech instructions through simulated session.
